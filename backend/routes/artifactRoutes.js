@@ -3,12 +3,13 @@ import {
   createArtifact,
   getArtifacts,
   updateArtifact,
-  deleteArtifact
+  deleteArtifact,
 } from '../controllers/artifactController.js';
 import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
+// ✅ Connect protected routes
 router.route('/')
   .get(protect, getArtifacts)
   .post(protect, createArtifact);

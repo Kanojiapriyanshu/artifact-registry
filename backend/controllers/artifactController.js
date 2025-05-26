@@ -1,15 +1,22 @@
 import Artifact from '../models/Artifact.js';
 
 export const createArtifact = async (req, res) => {
+  const { title, description } = req.body;
+  if (!title || !description) {
+    return res.status(400).json({ message: 'Title and description are required' });
+  }
+
   try {
     const artifact = await Artifact.create({
-      ...req.body,
+      title,
+      description,
       userId: req.user.id,
-      traceLogs: [{ action: 'created', timestamp: new Date() }]
+      traceLogs: [{ action: 'created', timestamp: new Date() }],
     });
     res.status(201).json(artifact);
   } catch (err) {
-    res.status(500).json({ message: 'Error creating artifact' });
+    console.error('Artifact creation error:', err.message);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
@@ -50,7 +57,7 @@ export const deleteArtifact = async (req, res) => {
     artifact.traceLogs.push({ action: 'soft-deleted', timestamp: new Date() });
 
     await artifact.save();
-    res.status(200).json({ message: 'Artifact archived (soft deleted)' });
+    res.status(200).json({ message: 'Artifact archived' });
   } catch (err) {
     res.status(500).json({ message: 'Error deleting artifact' });
   }
