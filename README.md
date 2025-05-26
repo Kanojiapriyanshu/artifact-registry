@@ -126,8 +126,8 @@ npm run dev
 
 ## 🧑‍💻 Author
 
-> Developed by \[Your Name]
-> 📨 Email: [you@example.com](mailto:priyanshukanojia907@gmail.com)
+> Developed by \[Priyanshu]
+> 📨 Email: [mail](mailto:priyanshukanojia907@gmail.com)
 
 
 ---
